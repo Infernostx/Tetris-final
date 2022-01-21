@@ -10,14 +10,13 @@ class Tetromino {
         this.block = shapes[this.shapeId];
         this.blockIndex = floor(random(this.block.shape.length));
         this.color = shapes[this.shapeId].color;
-
         this.pos = {
             //x: 4,
             x: (this.parentField.dimX)/2,
             y: 0
         };
     }
-
+//Colisiones
     move(moved = "down") {
         let temp = this.clone();
         temp.makeMove(moved);
@@ -33,7 +32,7 @@ class Tetromino {
         this.pos.x += dir[moved].x;
         this.pos.y += dir[moved].y;
     }
-
+//Asignacion de los valores hexadecimales a una matriz
     updateShape() {
         this.shape = (this.block.shape[this.blockIndex]).toString(16).padStart(4, '0').split('').map(row => parseInt(row, 16).toString(2).padStart(4, '0').split('').map(num => parseInt(num)));
     }
@@ -44,7 +43,7 @@ class Tetromino {
         }
         else{this.color = colorPicker.color();}
     } */
-
+//separacion de los tetrominos en piezas individuales
     split() {
         let splitted = [];
         for (let x = 0; x < 4; x++) {
@@ -105,7 +104,7 @@ class Tetromino {
         return temp;
     }
 }
-
+//direcciones quemadas
 const dir = {
     "left": {
         x: -1,

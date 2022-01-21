@@ -10,7 +10,6 @@ class Board {
 
     animate() {
         if (this.gameOver) {
-        alert('Game over');
         reset();
         return false;}
         if (!this.activeTet.move()) {
@@ -25,7 +24,7 @@ class Board {
             while (this.checkRow() && i >= 0) i--;
         }
     }
-
+//Checkeo de la linea completada para asignar puntuacion, por medio de sorteo de matrices y concat para filtrar los elmentos individuales de los tetrominos y verificar 0 y en la matriz.
     checkRow() {
         const occRows = this.tetrominos.reduce((acc, curr) => acc.concat(curr.pos.y), []).filter((item, pos, self) => self.indexOf(item) == pos).sort((a, b) => b - a);
         for (let row of occRows) {
@@ -40,15 +39,17 @@ class Board {
                 for (let i = 0; i < this.tetrominos.length; i++) {
                     if (this.tetrominos[i].pos.y < row) {
                         this.tetrominos[i].pos.y = this.tetrominos[i].pos.y + 1;
+
                     }
                 }
-                this.score += 1;
+                
+                this.score += 100;
                 return true;
             }
         }
         return false;
     }
-
+//colisiones
     moveClear(temp) {
         let nextTetro = genArray(dimY, dimX);
         for (let x = 0; x < 4; x++) {
